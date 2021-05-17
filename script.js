@@ -1,21 +1,21 @@
-  //LANGUAGE DROPDOWN
-  $(".option").click(function() {
+ //LANGUAGE DROPDOWN
+ $(".langoption").click(function() {
    $(".langtitle").text($(this).text()); 
-   $(".list").hide();
+   $(".select-lang .langlist").hide();
 });
 
-$(".option").click(function() {
+$(".langoption").click(function() {
    $(".langtitle").text($(this).text()); 
 });
 
-$(".langtitle").click(function() {
+$(".langtitle").click(function(s) {
    $(this).addClass('opened-lang')
    $("#lang_dropdown ul").show();
 });
 
 //Hide selected language in dropdown
 var hideLang = function() {
-   $('.list a').each(function(i, li) {
+   $('.select-lang  .langlist a').each(function(i, li) {
       var title =  $('.langtitle');
       if(li.innerText === title.text()) {
          li.parentElement.style.display = "none";
@@ -25,3 +25,21 @@ var hideLang = function() {
    })
 };
 setInterval(hideLang, 0);
+
+
+//Hide menu links when click outside element
+$(document).mouseup(function (e) {
+
+   /**
+    * Bu 2 setr kod mouseup eventine elave edilib 
+    */
+   $(".langlist").hide(); //hide language dropdown
+   $('.langtitle').removeClass('opened-lang')
+   /** */
+
+   if ($(e.target).closest(user).length === 0) {
+      $(".user-image-dsk .sidebar").hide();
+      $('body').removeClass('js-side-dashboard-open');
+      $('body').removeClass('js-side-menu-open');
+   }
+});
